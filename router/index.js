@@ -1,13 +1,10 @@
 const express = require('express');
-
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+// 用户相关路由
+router.use(require('./user'));
 
-router.get('/lk', (req, res) => {
-    res.send('Hello LK!')
-})
+// 用户资料相关路由
+router.use('/profiles', require('./profile'));
 
 module.exports = router;

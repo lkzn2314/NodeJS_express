@@ -2,8 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const router = require('./router');
+const errHandle = require('./middleware/err-handle');
+require('./model');
 
 const app = express();
+
+const PORT = process.env.PORT || 3000;
 
 // 日志输出
 app.use(morgan('dev'));
@@ -15,9 +19,10 @@ app.use(express.urlencoded());
 // 跨域
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-
 // 挂载路由
 app.use('/api', router);
+
+// 挂载统一处理服务端错误中间件
+app.use(errHandle());
 
 app.listen(PORT, () => console.log(`server running at http://localhost:${PORT}/`))
