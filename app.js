@@ -9,12 +9,13 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// 除了错误处理中间件，其他必须在路由之前
 // 日志输出
 app.use(morgan('dev'));
 
 // 解析请求体
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: false}));
 
 // 跨域
 app.use(cors());
